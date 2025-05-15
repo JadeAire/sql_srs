@@ -7,10 +7,17 @@ data = {"a" : [1, 2, 3], "b" : [4, 5, 6]}
 
 st.write("Hello World")
 
+option = st.selectbox("What would you like to review ?", 
+                      ("joins", "groupby", "windows function"),
+                      index = None,
+                      placeholder="Select a theme")
+
 query = st.text_area(label="Write your SQL command")
-st.write(f"Voici votre requête : {query}")
+
 
 
 df = pd.DataFrame(data)
 
-st.dataframe(duckdb.sql(query).df())
+if query :
+    st.write(f"Voici votre requête : {query}")
+    st.dataframe(duckdb.sql(query).df())
