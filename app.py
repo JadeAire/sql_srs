@@ -51,18 +51,9 @@ solution = duckdb.sql(answer).df()
 
 with st.sidebar :
     option = st.selectbox("What subject would you like to work on ?",
-                        ("RH", "production"),
-data = {"a" : [1, 2, 3], "b" : [4, 5, 6]}
-
-
-st.write("Hello World")
-
-with st.sidebar :
-    option = st.selectbox("What would you like to review ?",
-                        ("joins", "groupby", "windows function"),
-                        index = None,
-                        placeholder="Select a theme")
-    st.text(f"vous avez choisi : {option}")
+                            ("RH", "production"),
+                            index = None,
+                            placeholder = "Select a theme")
 
 
 st.write("Suivi de performance machine (TRS ou OEE)")
