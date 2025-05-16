@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import streamlit as st
 import pandas as pd
 import duckdb
@@ -76,3 +77,5 @@ with tab1:
 
 with tab2:
     st.write(answer)
+=======
+>>>>>>> 6c4eb1a (commit pour générer le chaos)
