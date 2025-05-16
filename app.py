@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f6e8882 (commit pour générer le chaos suite)
 import streamlit as st
 import pandas as pd
 import duckdb
 
+<<<<<<< HEAD
 production_log = [
     {"machine_id": "M1", "production_date": "2024-04-01", "units_produced": 480, "expected_units": 600},
     {"machine_id": "M2", "production_date": "2024-04-01", "units_produced": 300, "expected_units": 300},
@@ -53,11 +57,22 @@ solution = duckdb.sql(answer).df()
 with st.sidebar :
     option = st.selectbox("What subject would you like to work on ?",
                         ("RH", "production"),
+=======
+data = {"a" : [1, 2, 3], "b" : [4, 5, 6]}
+
+
+st.write("Hello World")
+
+with st.sidebar :
+    option = st.selectbox("What would you like to review ?",
+                        ("joins", "groupby", "windows function"),
+>>>>>>> f6e8882 (commit pour générer le chaos suite)
                         index = None,
                         placeholder="Select a theme")
     st.text(f"vous avez choisi : {option}")
 
 
+<<<<<<< HEAD
 st.write("Suivi de performance machine (TRS ou OEE)")
 st.write("Quelle est la performance moyenne de chaque machine au cours des 30 derniers jours ? Quelles machines ont un rendement inférieur à 80 % ?")
 
@@ -79,3 +94,14 @@ with tab2:
     st.write(answer)
 =======
 >>>>>>> 6c4eb1a (commit pour générer le chaos)
+=======
+query = st.text_area(label="Write your SQL command")
+
+
+
+df = pd.DataFrame(data)
+
+if query :
+    st.write(f"Voici votre requête : {query}")
+    st.dataframe(duckdb.sql(query).df())
+>>>>>>> f6e8882 (commit pour générer le chaos suite)
