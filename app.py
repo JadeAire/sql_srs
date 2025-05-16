@@ -49,12 +49,19 @@ HAVING(productivity < 0.85)
 
 solution = duckdb.sql(answer).df()
 
+with st.sidebar :
+    option = st.selectbox("What subject would you like to work on ?",
+                            ("RH", "production"),
+                            index = None,
+                            placeholder = "Select a theme")
+
 
 st.write("Suivi de performance machine (TRS ou OEE)")
 st.write("Quelle est la performance moyenne de chaque machine au cours des 30 derniers jours ? Quelles machines ont un rendement inférieur à 80 % ?")
 
 st.header("Enter your code :")
 query = st.text_area(label="Write your SQL command", key="user_input")
+
 
 tab1, tab2 = st.tabs(["Tables", "Solution"])
 
