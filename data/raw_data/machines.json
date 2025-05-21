@@ -1,0 +1,12 @@
+[
+    {
+        "machine_id": "M1",
+        "machine_name": "Machine Alpha",
+        "installation_date": "2020-01-01"
+    },
+    {
+        "machine_id": "M2",
+        "machine_name": "Machine Beta",
+        "installation_date": "2021-03-15"
+    }
+]
