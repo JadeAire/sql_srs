@@ -1,4 +1,3 @@
-import streamlit as st
 import pandas as pd
 import duckdb
 
@@ -95,8 +94,6 @@ production_log = [
     },
 ]
 
-df_prod_logs = pd.DataFrame(production_log)
-
 machines = [
     {
         "machine_id": "M1",
@@ -110,51 +107,10 @@ machines = [
     },
 ]
 
+df_prod_logs = pd.DataFrame(production_log)
 df_machines = pd.DataFrame(machines)
 
-answer = """
-SELECT
-    machine_name,
-    SUM(units_produced) AS units_produced_30_last_days,
-    SUM(expected_units) AS units_expected_30_last_days,
-    units_produced_30_last_days / units_expected_30_last_days AS productivity
-FROM df_machines
-LEFT JOIN df_prod_logs
-USING(machine_id)
-WHERE CAST(production_date AS DATE) <= CURRENT_DATE - INTERVAL 30 DAYS
-GROUP BY machine_name
-HAVING(productivity < 0.85)
-"""
-
-solution = duckdb.sql(answer).df()
-
-with st.sidebar:
-    option = st.selectbox(
-        "What subject would you like to work on ?",
-        ("RH", "production"),
-        index=None,
-        placeholder="Select a theme",
-    )
-
-
-st.write("Suivi de performance machine (TRS ou OEE)")
-st.write(
-    """Quelle est la performance moyenne de chaque machine au cours des 30 derniers jours ? Quelles machines ont un rendement inférieur à 80 % ?"""
-)
-
-st.header("Enter your code :")
-query = st.text_area(label="Write your SQL command", key="user_input")
-
-
-tab1, tab2 = st.tabs(["Tables", "Solution"])
-
-with tab1:
-    st.write("table : machine")
-    st.dataframe(df_machines)
-    st.write("table : Logs de production")
-    st.dataframe(df_prod_logs)
-    st.write("tables attendue")
-    st.dataframe(solution)
-
-with tab2:
-    st.write(answer)
+with duckdb.connect(database="data/sql.duckdb", read_only = False) as con : 
+    con.execute("CREATE TABLE IF NOT EXISTS production_logs AS SELECT * FROM df_prod_logs")
+    con.execute("CREATE TABLE IF NOT EXISTS machines AS SELECT * FROM df_machines")
+    con.sql("SELECT * FROM machines").show()
